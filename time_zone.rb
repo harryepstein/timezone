@@ -7,7 +7,7 @@ require 'pp'
 require 'pry'
 # require 'pry-byebug'
 # require 'pry-debugger'
-require 'pry-nav'
+# require 'pry-nav'
 require 'pry-stack_explorer'
 
 
@@ -77,7 +77,7 @@ attr_reader :api
 
     # return timezone from returned time
   end
-  
+  binding.pry
   def latlong_to_timezone(lat:, lon:, api:)
     
     # make call to google maps for timezone from latlong
