@@ -89,7 +89,7 @@ attr_reader :api
       http.request(req)
     }
     
-    data = JSON.parse(res.to_s).inspect
+    data = JSON.parse(res.to_s).inspect 
     puts data
     timezone
   end
