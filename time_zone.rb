@@ -91,15 +91,11 @@ attr_reader :api
       http.request(req)
     }
     parsed_response = Nokogiri::XML.parse(res.body)
-
-    
-    data = JSON.parse(response_body.to_s).inspect 
-    puts data
     timezone
   end
   def currentTimezoneBasedOnCurrentLocalTime(timezone)
 
-    
+      converted_current_time 
   end
 end
 
@@ -108,6 +104,5 @@ binding.pry
 
 a_tz.city_input()
 a_tz.input_to_latlong(@which_city)
-
 
 a_tz.latlong_to_timezone(lat: @lat, lon: @lon, api: $api)
