@@ -10,6 +10,11 @@ GEM
     geocoder (1.5.0)
     json (2.1.0)
     method_source (0.8.2)
+    mini_portile2 (2.4.0)
+    nokogiri (1.9.1-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.9.1-x86-mingw32)
+      mini_portile2 (~> 2.4.0)
     pp (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -41,6 +46,7 @@ DEPENDENCIES
   dotenv
   geocoder
   json
+  nokogiri
   pp
   pry
   pry-stack_explorer

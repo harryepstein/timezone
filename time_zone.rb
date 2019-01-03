@@ -9,12 +9,14 @@ require 'pry'
 # require 'pry-debugger'
 # require 'pry-nav'
 require 'pry-stack_explorer'
+require 'nokogiri'
 
-
+@@api = ENV['API']
 # require 'pry-rescue'
 # require 'pry-stack_explorer'
 # require 'pry-byebug'
 class TimeZone
+  @@api = ENV['API']
   # because why not, I've never seen these before
   puts "all the cool dollar values:", $*
   puts $!,
@@ -58,18 +60,18 @@ attr_reader :api
 
   def city_input
     puts 'Which city?'
-    which_city = gets.chomp
+    @which_city = gets.chomp
   end
 
 # this is still just a test of the SaveAndRun settings
 # convert input to appropriate time zone
   def input_to_latlong(which_city)
     # make a call api to get long/lat for requested city
-    results = Geocoder.search(which_city)
-    lat = results[0].data['lat']#the secret was that the index was needed to further access the data members
-    lon = results[0].data['lon']
+    results = Geocoder.search(@which_city)
+    @lat = results[0].data['lat']#the secret was that the index was needed to further access the data members
+    @lon = results[0].data['lon']
     puts "The results are: #{lat} #{lon}"
-    [lat, lon]
+    [@lat, @lon]
     # lat = results['lat']
     # long = results['lon']
     # return lat, long
@@ -77,20 +79,35 @@ attr_reader :api
 
     # return timezone from returned time
   end
-  binding.pry
+  
   def latlong_to_timezone(lat:, lon:, api:)
     
     # make call to google maps for timezone from latlong
     # SAMPLE  QUERY http://api.timezonedb.com/v2.1/get-time-zone?key=YOUR_API_KEY&format=xml&by=zone&zone=America/Chicago  # 
-    query = URI.parse("http://api.timezonedb.com/v2.1/get-time-zone?key=#{api}&format=xml&by=position&lat=#{lat}&long=#{lon}")
+    query = URI.parse("http://api.timezonedb.com/v2.1/get-time-zone?key=#{@api}&format=xml&by=position&lat=#{@lat}&lng=#{@lon}")
     
     req = Net::HTTP::Get.new(query.to_s)
     res = Net::HTTP.start(query.host, query.port) {|http|
       http.request(req)
     }
+    parsed_response = Nokogiri::XML.parse(res.body)
+
     
-    data = JSON.parse(res.to_s).inspect 
+    data = JSON.parse(response_body.to_s).inspect 
     puts data
     timezone
   end
+  def currentTimezoneBasedOnCurrentLocalTime(timezone)
+
+    
+  end
 end
+
+a_tz = TimeZone.new
+binding.pry
+
+a_tz.city_input()
+a_tz.input_to_latlong(@which_city)
+
+
+a_tz.latlong_to_timezone(lat: @lat, lon: @lon, api: $api)
