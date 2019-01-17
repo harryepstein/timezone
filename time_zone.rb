@@ -4,10 +4,10 @@ require 'net/http'
 require 'dotenv'
 # require 'tk'
 require 'pp'
-require 'pry'
+require "pry"
 # require 'pry-byebug'
 # require 'pry-debugger'
-# require 'pry-nav'
+require 'pry-nav'
 require 'pry-stack_explorer'
 require 'nokogiri'
 
@@ -91,9 +91,9 @@ attr_reader :api
       http.request(req)
     }
     parsed_response = Nokogiri::XML.parse(res.body)
-    timezone
+    puts @timezone
   end
-  def currentTimezoneBasedOnCurrentLocalTime(timezone)
+  def convert_tz_to_local(timezone)
 
       converted_current_time 
   end
