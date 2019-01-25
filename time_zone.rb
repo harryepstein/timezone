@@ -105,4 +105,4 @@ binding.pry
 a_tz.city_input()
 a_tz.input_to_latlong(@which_city)
 
-a_tz.latlong_to_timezone(lat: @lat, lon: @lon, api: $api)
+a_tz.latlong_to_timezone(lat: @lat, lon: @lon, api: $api) 
